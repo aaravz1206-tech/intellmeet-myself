@@ -83,3 +83,10 @@ const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+
+// ... all your app.use('/api/...') lines ...
+
+// These MUST be at the bottom
+app.use(notFound);
+app.use(errorHandler);
