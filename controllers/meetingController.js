@@ -38,3 +38,23 @@ export const getMeetingByCode = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// @desc    Get all meetings for the logged-in user
+// @route   GET /api/meetings/history
+export const getMyMeetings = async (req, res) => {
+  try {
+    // Finds meetings where user is host OR in the participants array
+    const meetings = await Meeting.find({
+      $or: [
+        { host: req.user._id },
+        { participants: req.user._id }
+      ]
+    })
+    .populate('host', 'name email avatar') // Links host details
+    .sort({ createdAt: -1 }); // Newest meetings first
+
+    res.json(meetings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
