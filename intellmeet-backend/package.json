@@ -1,15 +1,16 @@
 {
   "name": "intellmeet-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "IntellMeet backend service",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node src/server.js",
+    "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.10.0",

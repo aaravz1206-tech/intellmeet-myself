@@ -59,23 +59,3 @@ export const getMyMeetings = async (req, res) => {
   }
 };
 
-
-// @desc    Get user's past and active meetings
-// @route   GET /api/meetings/history
-export const getMyMeetings = async (req, res) => {
-  try {
-    // Find meetings where user is host OR in the participants list
-    const meetings = await Meeting.find({
-      $or: [
-        { host: req.user._id },
-        { participants: req.user._id }
-      ]
-    })
-    .populate('host', 'name email avatar') // Get host details automatically
-    .sort({ createdAt: -1 }); // Show newest first
-
-    res.status(200).json(meetings);
-  } catch (error) {
-    res.status(500).json({ message: "Failed to fetch meeting history" });
-  }
-};
